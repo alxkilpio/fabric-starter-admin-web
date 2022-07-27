@@ -3,11 +3,5 @@
 packageName=admin-webapp.tgz
 rm -f ${packageName}
 
-npm install
-npx au build --env prod
-echo "Built"
-
-tar -zcvf ${packageName} index.html scripts
-echo "Package prepared"
-
+NODE_IMAGE='node:12-alpine' DOCKER_BUILDKIT=1 docker build --no-cache --progress=plain --output ./ .
 cp -v ${packageName} ../fabric-starter-rest
