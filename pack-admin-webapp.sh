@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
-packageName=admin-webapp.tgz
+PACKAGE_NAME=${PACKAGE_NAME:-admin-webapp.tgz}
 rm -f ${packageName}
 
-NODE_IMAGE='node:12-alpine' DOCKER_BUILDKIT=1 docker build --no-cache --progress=plain --output ./ .
-cp -v ${packageName} ../fabric-starter-rest
+DOCKER_BUILDKIT=1 \
+docker build \
+--build-arg NODE_IMAGE=${NODE_IMAGE:-node:12-alpine} \
+--build-arg PACKAGE_NAME=${PACKAGE_NAME} \
+--no-cache --progress=plain --output ./ .
+
+cp -v ${PACKAGE_NAME} ../fabric-starter-rest
