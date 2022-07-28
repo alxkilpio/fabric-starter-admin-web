@@ -27,4 +27,3 @@ node_modules
 scripts
 /src/environment.js
 .DS_Store
-/.idea/
